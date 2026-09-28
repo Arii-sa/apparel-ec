@@ -1,3 +1,4 @@
+import Link from "next/link";
 import type { Product } from "../types";
 
 type ProductCardProps = {
@@ -10,7 +11,10 @@ export function ProductCard({ product }: ProductCardProps) {
   const hasStock = product.variants.some((variant) => variant.is_in_stock);
 
   return (
-    <div className="rounded-lg border border-gray-200 p-4 shadow-sm">
+    <Link
+      href={`/products/${product.slug}`}
+      className="block rounded-lg border border-gray-200 p-4 shadow-sm transition-shadow hover:shadow-md"
+    >
       <p className="text-xs text-gray-500">{product.category.name}</p>
       <h3 className="mt-1 text-lg font-semibold">{product.name}</h3>
       {minPrice !== null && (
@@ -23,6 +27,6 @@ export function ProductCard({ product }: ProductCardProps) {
       >
         {hasStock ? "在庫あり" : "在庫切れ"}
       </p>
-    </div>
+    </Link>
   );
 }

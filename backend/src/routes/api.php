@@ -10,6 +10,7 @@ Route::get('/user', function (Request $request) {
 })->middleware('auth:sanctum');
 
 Route::get('/products', [ProductController::class, 'index']);
+Route::get('/products/{slug}', [ProductController::class, 'show']);
 
 Route::middleware('auth:sanctum')->group(function () {
     Route::post('/admin/products', [ProductController::class, 'store']);
