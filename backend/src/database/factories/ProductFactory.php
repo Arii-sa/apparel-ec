@@ -34,7 +34,7 @@ class ProductFactory extends Factory
         return [
             'category_id' => Category::factory(),
             'name' => $name,
-            'slug' => Str::slug($name) ?: Str::random(8),
+            'slug' => Str::slug($name).'-'.Str::random(6),
             'description' => fake()->realTextBetween(50, 150),
             'is_published' => true,
         ];
