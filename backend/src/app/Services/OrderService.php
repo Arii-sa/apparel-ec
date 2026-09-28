@@ -5,8 +5,8 @@ namespace App\Services;
 use App\Models\Order;
 use App\Models\ProductVariant;
 use App\Models\User;
+use App\Exceptions\InsufficientStockException;
 use Illuminate\Support\Facades\DB;
-use RuntimeException;
 
 class OrderService
 {
@@ -31,7 +31,7 @@ class OrderService
                     ->firstOrFail();
 
                 if (! $variant->hasSufficientStock($item['quantity'])) {
-                    throw new RuntimeException("「{$variant->sku}」の在庫が不足しています。");
+                    throw new InsufficientStockException("「{$variant->sku}」の在庫が不足しています。");
                 }
 
                 $lockedVariants[] = [
