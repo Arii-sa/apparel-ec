@@ -15,6 +15,9 @@ export function Header() {
       <nav className="flex items-center gap-4 text-sm">
         {isLoading ? null : user ? (
           <>
+            <Link href="/account/addresses" className="hover:underline">
+              配送先住所
+            </Link>
             <span>{user.name}さん</span>
             <button
               onClick={() => logout()}
