@@ -2,9 +2,12 @@
 
 import Link from "next/link";
 import { useAuth } from "@/features/auth/context/AuthContext";
+import { useCart } from "@/features/cart/context/CartContext";
 
 export function Header() {
   const { user, isLoading, logout } = useAuth();
+  const { items } = useCart();
+  const itemCount = items.reduce((sum, item) => sum + item.quantity, 0);
 
   return (
     <header className="flex items-center justify-between border-b border-gray-200 p-4">
@@ -13,6 +16,10 @@ export function Header() {
       </Link>
 
       <nav className="flex items-center gap-4 text-sm">
+        <Link href="/cart" className="hover:underline">
+          カート{itemCount > 0 && `(${itemCount})`}
+        </Link>
+
         {isLoading ? null : user ? (
           <>
             <Link href="/account/addresses" className="hover:underline">

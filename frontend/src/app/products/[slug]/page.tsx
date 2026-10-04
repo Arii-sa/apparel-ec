@@ -1,5 +1,6 @@
 import { notFound } from "next/navigation";
 import { fetchProductBySlug } from "@/features/products/api";
+import { AddToCartForm } from "@/features/cart/components/AddToCartForm";
 
 type ProductDetailPageProps = {
   params: Promise<{ slug: string }>;
@@ -51,6 +52,8 @@ export default async function ProductDetailPage({
           </div>
         ))}
       </div>
+
+      <AddToCartForm product={product} />
     </main>
   );
 }
